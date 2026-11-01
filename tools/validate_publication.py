@@ -30,6 +30,26 @@ def private_identity_errors(value, path=""):
     return errors
 
 
+def check_boot_profile(data, filename):
+    apple = "7C436110-AB2A-4BBB-A880-FE41995C9F82"
+    args = data["NVRAM"]["Add"][apple]["boot-args"].split()
+    assert "-s" not in args, "Maintenance boot argument in public example"
+    if filename == "config.pre-expansion.sample.plist":
+        assert "cpus=1" in args, "Historical Sequoia profile lost its CPU limit"
+    elif filename == "config.tahoe26.known-good.sample.plist":
+        assert not any(a.startswith("cpus=") for a in args), "CPU limit in current Tahoe profile"
+        assert "-v" not in args and "-nvoff" not in args, "Known conflicting argument in current profile"
+        assert data["UEFI"]["Quirks"]["RequestBootVarRouting"] is False
+        assert "boot-args" in data["NVRAM"]["Delete"][apple]
+        for name in ("CpuTopologyRebuild.kext", "CpuTscSync.kext"):
+            entry = next(k for k in data["Kernel"]["Add"] if k["BundlePath"] == name)
+            assert entry["Enabled"] and entry["MinKernel"] == "25.0.0" and entry["MaxKernel"] == "25.99.99"
+        assert not any(p["Enabled"] for p in data["Kernel"]["Patch"] if p["Base"] == "_cpu_thread_alloc")
+        assert not any(k["Enabled"] and k["BundlePath"] in {"SimpleHDA.kext", "CirrusAudioFixup.kext"} for k in data["Kernel"]["Add"])
+    else:
+        raise AssertionError("Unrecognized configuration profile: " + filename)
+
+
 def local_target(root, document, link):
     url = urlsplit(link)
     if url.scheme or url.netloc or not url.path:
@@ -65,7 +85,22 @@ def self_test():
         pass
     else:
         raise AssertionError("Escaping link accepted")
-    print("PASS: identity fields, binary identity, nested fields and link boundaries.")
+    import copy
+    old = plistlib.loads((ROOT / "config/config.pre-expansion.sample.plist").read_bytes())
+    current = plistlib.loads((ROOT / "config/config.tahoe26.known-good.sample.plist").read_bytes())
+    check_boot_profile(old, "config.pre-expansion.sample.plist")
+    check_boot_profile(current, "config.tahoe26.known-good.sample.plist")
+    apple = "7C436110-AB2A-4BBB-A880-FE41995C9F82"
+    for change in (" -v", " cpus=1", " -nvoff"):
+        bad = copy.deepcopy(current)
+        bad["NVRAM"]["Add"][apple]["boot-args"] += change
+        try:
+            check_boot_profile(bad, "config.tahoe26.known-good.sample.plist")
+        except AssertionError:
+            pass
+        else:
+            raise AssertionError("Conflicting Tahoe argument accepted: " + change)
+    print("PASS: identity fields, link boundaries, historical/current profiles and conflicting boot arguments.")
 
 
 def validate():
@@ -85,8 +120,8 @@ def validate():
             data = plistlib.loads(raw)
             assert not private_identity_errors(data), "Identity fields not empty in " + relative
             assert data["Misc"]["Entries"] == [] and data["Misc"]["Tools"] == []
-            bootargs = data["NVRAM"]["Add"]["7C436110-AB2A-4BBB-A880-FE41995C9F82"]["boot-args"]
-            assert "cpus=1" in bootargs.split() and "-s" not in bootargs.split()
+            assert not any(key.startswith("bluetooth") for ns in data["NVRAM"]["Add"].values() for key in ns), "Machine Bluetooth data in " + relative
+            check_boot_profile(data, item.name)
         if item.suffix == ".md":
             for link in re.findall(r"\[[^\]]*\]\(([^)]+)\)", text):
                 target = local_target(ROOT, item, link)

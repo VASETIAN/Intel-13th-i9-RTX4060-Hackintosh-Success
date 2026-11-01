@@ -1,5 +1,16 @@
 # 脱敏配置示例
 
+## 当前 Tahoe 26 与历史 Sequoia 15
+
+- **当前**：[config.tahoe26.known-good.sample.plist](config.tahoe26.known-good.sample.plist)，来自机主 2026-11-01 确认可开机的 EFI。无 cpus=1、无 -v、无 -nvoff；CpuTopologyRebuild 2.0.2 和 CpuTscSync 1.1.2 按 Darwin 25 启用；force-HT Patch 禁用，RequestBootVarRouting=False。
+- **历史**：[config.pre-expansion.sample.plist](config.pre-expansion.sample.plist)，保留 Sequoia 15.7.9 阶段的 cpus=1 和驱动范围，不用当前值覆盖历史原件。
+
+两者均清空 SMBIOS、ROM、UUID 等身份，删除本机 Misc/Entries、Misc/Tools 和蓝牙控制器本机数据。公开示例与私人完整 EFI 字节不同；没有附 kext、UEFI 驱动或整套固件表，不能直接启动。当前版本、范围和主要文件哈希见 [驱动清单](../evidence/tahoe26-drivers.json)，修复经过见 [Tahoe 记录](../docs/TAHOE26.zh-CN.md)。
+
+下面的单核、拓扑禁用等说明仅描述历史 Sequoia 示例。
+
+## 历史 Sequoia 示例的来源
+
 `config.pre-expansion.sample.plist` 从本项目扩容前已安装 NVIDIA 驱动的可用配置生成，只做发布所需的脱敏与删除本机专用工具入口。不是当前正在运行的 EFI，也不会被检查脚本部署到系统。
 
 ## 已去除的内容

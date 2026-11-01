@@ -1,0 +1,82 @@
+{
+  "scope": "Pre-expansion installation and usable desktop only",
+  "os": {
+    "name": "macOS Sequoia",
+    "version": "15.7.9",
+    "build": "24G830"
+  },
+  "hardware": {
+    "cpu": "Intel Core i9-13900H",
+    "physical_cores": 14,
+    "logical_threads": 20,
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop",
+    "gpu_pci": "10DE:28E0",
+    "igpu": "Intel Iris Xe",
+    "igpu_pci": "8086:A7A0",
+    "memory_gb": 16,
+    "model": "Lenovo ThinkBook 16p G4 IRH 21J8",
+    "bios": "LRCN52WW",
+    "wifi": "Intel AX203",
+    "wifi_pci": "8086:51F1",
+    "display_pixels": [
+      3200,
+      2000
+    ],
+    "active_internal_display_route": "NVIDIA eDP",
+    "observed_refresh_hz": 165.001
+  },
+  "verified": [
+    {
+      "id": "installation",
+      "evidence": "Installed SystemVersion.plist and patchd success",
+      "result": "15.7.9 / 24G830; ota-result=success; FINISHED-ENGINES(SUCCESS)"
+    },
+    {
+      "id": "account",
+      "evidence": "Native account checks and subsequent user desktop feedback",
+      "result": "Password, administrator membership, home ownership and Secure Token checks reported passed"
+    },
+    {
+      "id": "wifi",
+      "evidence": "Interface metadata and direct user feedback",
+      "result": "Builtin en0; Wi-Fi usable"
+    },
+    {
+      "id": "nvidia-installed",
+      "evidence": "Pre-expansion source backup metadata",
+      "checkpoint": 17198,
+      "result": {
+        "NVRM": "2.5.4",
+        "NVAccel": "2.5.4",
+        "NVRMFB": "2.5.4",
+        "NVRMAGDC": "2.5.4"
+      }
+    },
+    {
+      "id": "desktop",
+      "evidence": "Direct pre-expansion user feedback after driver installation",
+      "result": "Normal daily use reported; no independent Metal benchmark"
+    },
+    {
+      "id": "windows-protection",
+      "evidence": "Before/after firmware, loader and EFI file checks",
+      "result": "Windows default and original boot files preserved during installation work"
+    }
+  ],
+  "limitations": {
+    "cpus_boot_argument": 1,
+    "full_cpu_performance_verified": false,
+    "setup_assistant_root_cause_fixed": false,
+    "local_account_workaround_used": true,
+    "apple_id_final_resolution_verified": false,
+    "airdrop_user_report": "not working",
+    "full_usb_audio_sleep_touchpad_validation": false,
+    "independent_metal_benchmark": false
+  },
+  "publication": {
+    "raw_logs_included": false,
+    "system_images_included": false,
+    "personal_identity_included": false,
+    "live_system_modified": false
+  }
+}

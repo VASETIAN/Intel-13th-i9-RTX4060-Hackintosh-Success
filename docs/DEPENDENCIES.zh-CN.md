@@ -1,5 +1,31 @@
 # 依赖版本与来源
 
+## Tahoe 26 当前组合（2026-11-01）
+
+当前为 26.7.1 / 25G241。基础扩展沿用下方版本，新增/切换情况如下；所有 Kernel/Add 条目的版本、启用状态、Darwin 范围与 Info.plist/可执行文件 SHA256 见 [当前驱动清单](../evidence/tahoe26-drivers.json)。启用条目共 33 项，不表示受不同内核范围约束的驱动会同时加载。
+
+| 项目 | 当前版本及范围 | 来源与核验 |
+|---|---|---|
+| NVIDIA NVRM/NVRMFB/NVRMAGDC/NVAccel | 2.6.2，macOS 卷内扩展 | 安装与缓存元数据、10 月 30 日原机加载记录；[作者 2.6.2 发布页](https://github.com/nullmoth/nvidia-macos-driver/releases/tag/v2.6.2) |
+| CpuTopologyRebuild | 2.0.2，Darwin 25.0.0–25.99.99 | [固定版本说明](https://github.com/b00t0x/CpuTopologyRebuild/blob/2.0.2/README.md)；保留无 -v 组合 |
+| CpuTscSync | 1.1.2，Darwin 25.0.0–25.99.99 | [acidanthera/CpuTscSync](https://github.com/acidanthera/CpuTscSync)；按本机元数据记录，不猜测同名 release 资产 |
+| AirportItlwmTahoe | 2.4.0，Darwin 25.0.0–25.99.99 | 安装前备份恢复的实际文件；[分支仓库](https://github.com/laobamac/itlwm)，未据名称猜测 Tahoe ZIP 地址 |
+| AirportItlwm（Sequoia 项） | 2.4.0，Darwin 24.2.0–24.99.99 | 保留供对应内核范围使用，不作为 Tahoe 同时加载项 |
+| AppleALC | 1.9.9 | 原版保留，音频未完整验收；SimpleHDA/CirrusAudioFixup 不在当前活动 EFI |
+
+2026-11-01 读取作者 v2.6.2 release API，发布资产摘要为：
+
+| 资产 | 发布页声明的 SHA256 |
+|---|---|
+| nullmoth-nvidia-2.6.2.tar.gz | `ce896ae6a870ad340b52e2d8df9accf7daa003943eb53304a85d238f7a13da11` |
+| 1401-Mac-2.6.2.zip | `72a99f0859b5c0c89f580c71052c04f0b4ea627d68457fd18d61d3a555449428` |
+
+这里记录发布服务器声明，不声称本次重新下载并验证了这两个归档；当前安装的四个扩展版本与加载证据单独核对。原机使用本地 DBG109 / 1.0.9 OpenCore，继续保留下文对构建来源的限制，不分发二进制。
+
+下面为原始 Sequoia 15 安装阶段的材料，2.5.4、单核与“拓扑未启用”等描述仅属于该历史阶段，不能覆盖当前 Tahoe 组合。
+
+## Sequoia 15 历史依赖
+
 下列版本来自本机扩容前配置、扩展元数据及当时发布材料。它们用于记录本次组合，不代表当前最新推荐。下载前核对作者来源和实际 SHA256，不把压缩包放入 EFI 就视为已安装。
 
 ## 固定下载与校验和

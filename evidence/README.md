@@ -1,6 +1,10 @@
 # 公开证据摘要的范围
 
-`summary.json` 只保留经核对的技术结论、验证方式和少量非个人元数据，不复制原始 Verification 目录。
+`summary.json` 当前记录 Tahoe 26.7.1，截至 2026-11-01。旧 Sequoia 扩容前摘要保留为 `sequoia15.pre-expansion.json`；`tahoe26-drivers.json` 保存当前 EFI 驱动字段、版本和主要文件哈希。
+
+当前摘要分别标注 11 月 1 日机主确认开机、10 月 30 日原机图形进程/20 活动 CPU/NVIDIA 加载记录，以及静态检查。旧测量没有冒充本次新采集；VM 结果没有冒充原机桌面。
+
+公开文件只保留经核对的技术结论、验证方式和少量非个人元数据，不复制原始 Verification 目录。下列关于 Sequoia 的证据层次对应历史摘要。
 
 证据层次如下：
 

@@ -1,9 +1,10 @@
 {
-  "scope": "Pre-expansion installation and usable desktop only",
+  "record_date": "2026-11-01",
+  "scope": "Current Tahoe boot recovery with dated native telemetry; Sequoia history retained separately",
   "os": {
-    "name": "macOS Sequoia",
-    "version": "15.7.9",
-    "build": "24G830"
+    "name": "macOS Tahoe",
+    "version": "26.7.1",
+    "build": "25G241"
   },
   "hardware": {
     "cpu": "Intel Core i9-13900H",
@@ -25,58 +26,119 @@
     "active_internal_display_route": "NVIDIA eDP",
     "observed_refresh_hz": 165.001
   },
-  "verified": [
-    {
-      "id": "installation",
-      "evidence": "Installed SystemVersion.plist and patchd success",
-      "result": "15.7.9 / 24G830; ota-result=success; FINISHED-ENGINES(SUCCESS)"
-    },
-    {
-      "id": "account",
-      "evidence": "Native account checks and subsequent user desktop feedback",
-      "result": "Password, administrator membership, home ownership and Secure Token checks reported passed"
-    },
-    {
-      "id": "wifi",
-      "evidence": "Interface metadata and direct user feedback",
-      "result": "Builtin en0; Wi-Fi usable"
-    },
-    {
-      "id": "nvidia-installed",
-      "evidence": "Pre-expansion source backup metadata",
-      "checkpoint": 17198,
-      "result": {
-        "NVRM": "2.5.4",
-        "NVAccel": "2.5.4",
-        "NVRMFB": "2.5.4",
-        "NVRMAGDC": "2.5.4"
+  "firmware": {
+    "graphics_device": "Discrete Graphics",
+    "bios_updated_by_this_work": false
+  },
+  "current_boot": {
+    "date": "2026-11-01",
+    "bare_metal": true,
+    "owner_confirmed_normal_boot": true,
+    "evidence_type": "Direct owner feedback after driver rollback and removal of leading -v",
+    "new_full_successful_session_telemetry_collected": false,
+    "windows_default_owner_confirmed_fixed": true
+  },
+  "last_native_telemetry": {
+    "date": "2026-10-30",
+    "approx_local_time": "14:00 UTC+08:00",
+    "environment": "Physical machine, not VM",
+    "model_reported": "MacBookPro16,1",
+    "graphical_processes_observed": [
+      "WindowServer",
+      "Finder",
+      "Dock"
+    ],
+    "hw_activecpu": 20,
+    "hw_logicalcpu": 20,
+    "hw_logicalcpu_max": 20,
+    "hw_physicalcpu_reported": 6,
+    "hw_physicalcpu_max": 14,
+    "memory_bytes": 17179869184,
+    "bounded_compute_workers": 20,
+    "full_cpu_performance_certification": false,
+    "nvidia_loaded": {
+      "NVRM": {
+        "version": "2.6.2",
+        "macho_uuid": "4D64224B-5868-327C-A203-A25082F58AE3"
+      },
+      "NVAccel": {
+        "version": "2.6.2",
+        "macho_uuid": "554D05FA-7EDB-32DF-9327-B1ED17B5AD7C"
+      },
+      "NVRMFB": {
+        "version": "2.6.2",
+        "macho_uuid": "22958689-1A49-3F93-81D0-D6F2DD4E8E55"
+      },
+      "NVRMAGDC": {
+        "version": "2.6.2",
+        "macho_uuid": "EF61483E-E558-3981-9EEF-4E26C7B14CC3"
       }
     },
-    {
-      "id": "desktop",
-      "evidence": "Direct pre-expansion user feedback after driver installation",
-      "result": "Normal daily use reported; no independent Metal benchmark"
-    },
-    {
-      "id": "windows-protection",
-      "evidence": "Before/after firmware, loader and EFI file checks",
-      "result": "Windows default and original boot files preserved during installation work"
-    }
-  ],
-  "limitations": {
-    "cpus_boot_argument": 1,
-    "full_cpu_performance_verified": false,
-    "setup_assistant_root_cause_fixed": false,
-    "local_account_workaround_used": true,
-    "apple_id_final_resolution_verified": false,
-    "airdrop_user_report": "not working",
-    "full_usb_audio_sleep_touchpad_validation": false,
-    "independent_metal_benchmark": false
+    "nvidia_uuid_note": "Mach-O build identifiers, not machine or account identifiers"
   },
+  "configuration": {
+    "opencore_local_build": "DBG109 / 1.0.9",
+    "cpus_limit_present": false,
+    "verbose_v_present": false,
+    "nvoff_present": false,
+    "cpu_topology_rebuild": "2.0.2 / Darwin 25",
+    "cpu_tsc_sync": "1.1.2 / Darwin 25",
+    "force_ht_patches_enabled": false,
+    "request_boot_var_routing": false,
+    "iondrv_support_strategy": "Exclude",
+    "resize_gpu_bars": -1,
+    "resize_apple_gpu_bars": 0,
+    "public_sample": "config/config.tahoe26.known-good.sample.plist",
+    "public_sample_sha256": "70d85777802290c0d6bd21105832115446e9bc51ea49697c2451b3b810c8c9c7",
+    "public_sample_differs_from_private_efi": true,
+    "enabled_kernel_add_entries": 33
+  },
+  "boot_recovery": {
+    "voodoo_i2c_plugin_integrity_restored": true,
+    "pre_audio_driver_baseline_restored": true,
+    "withdrawn_active_efi_kexts": [
+      "SimpleHDA.kext",
+      "CirrusAudioFixup.kext"
+    ],
+    "final_change": "Removed only leading -v and one space from boot-args",
+    "final_bytes_removed": 3,
+    "owner_reported_success_after_final_change": true,
+    "single_root_cause_for_all_prior_errors_proven": false,
+    "upstream_verbose_caveat": "https://github.com/b00t0x/CpuTopologyRebuild/blob/2.0.2/README.md#current-problems"
+  },
+  "filesystem_check": {
+    "tool": "Native macOS fsck_apfs -n -l",
+    "target": "COW diagnostic view backed by enforced read-only physical APFS slice",
+    "exit_code": 0,
+    "original_apfs_repaired_or_written": false,
+    "third_party_windows_log_reader_was_reliable_for_recent_logs": false
+  },
+  "private_backup_verification": {
+    "scope": "Complete EFI/OC and EFI/BOOT, not a full macOS image",
+    "files": 171,
+    "bytes": 72789956,
+    "sha256_mismatches": 0,
+    "ocvalidate_build": "1.0.9",
+    "ocvalidate_passed": true,
+    "backup_binaries_uploaded": false
+  },
+  "unresolved_or_not_retested": [
+    "Speakers and microphone functionality",
+    "AirDrop: historical failure, no new successful transfer evidence",
+    "Apple ID: historical inconsistent state, no final resolution evidence",
+    "Current Wi-Fi performance and Bluetooth pairing/audio",
+    "Complete touchpad gestures, USB port mapping, sleep/wake, camera and external displays",
+    "Independent Metal/video codec benchmarks and sustained all-core performance",
+    "Original Setup Assistant root cause"
+  ],
   "publication": {
     "raw_logs_included": false,
     "system_images_included": false,
     "personal_identity_included": false,
-    "live_system_modified": false
-  }
+    "third_party_binaries_included": false,
+    "live_system_modified_for_publication": false,
+    "firmware_modified_for_publication": false,
+    "host_reboot_requested": false
+  },
+  "history": "evidence/sequoia15.pre-expansion.json"
 }
