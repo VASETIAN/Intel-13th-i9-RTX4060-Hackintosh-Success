@@ -1,0 +1,37 @@
+{
+  "publication_date": "2026-11-26",
+  "technical_baseline_date": "2026-11-01",
+  "native_telemetry_date": "2026-10-30",
+  "os": "macOS Tahoe 26.7.1 / 25G241",
+  "owner_finished_experience": true,
+  "new_native_boot_or_driver_test_performed": false,
+  "public_docs": [
+    "docs/REUSE.zh-CN.md",
+    "docs/PROJECT-CLOSEOUT.zh-CN.md",
+    "docs/TAHOE26.zh-CN.md",
+    "docs/STATUS.zh-CN.md"
+  ],
+  "private_efi_rechecked": {
+    "files": 171,
+    "bytes": 72789956,
+    "sha256_mismatches": 0,
+    "full_efi_uploaded": false
+  },
+  "full_backup_cleanup": {
+    "date": "2026-11-04",
+    "files_deleted": 40,
+    "allocated_bytes_deleted": 168330342400,
+    "retained_full_system_image": false,
+    "recoverable_from_github": false
+  },
+  "system_or_firmware_writes_for_publication": false,
+  "unresolved": [
+    "Microphone/speakers functionality",
+    "AirDrop",
+    "Apple ID final login state",
+    "Complete sleep/wake, USB, touchpad, camera and external display acceptance",
+    "Sustained performance and power consumption",
+    "Original Setup Assistant root cause"
+  ],
+  "public_artifact_scope": "Docs, sanitized configs, original patch source, file/version manifests and read-only checks; not a ready-to-boot EFI or system image"
+}

@@ -38,3 +38,7 @@
 ## 使用前的检查
 
 先读 [安装参考](../docs/REINSTALL.zh-CN.md) 和 [功能限制](../docs/STATUS.zh-CN.md)，根据自己的硬件、BIOS 和系统版本逐项比较。用匹配构建的 `ocvalidate` 和文件路径检查确认结构，再进行可回退的实机测试。仓库的只读验证只检查公开文件和脱敏条件，不能证明这份示例在另一台机器上可启动。
+
+## 下次核对自己的 EFI
+
+按 [复用指南](../docs/REUSE.zh-CN.md)准备副本后，可用 [check_efi.py](../tools/check_efi.py)只读检查脱敏后的配置和启用组件文件。公开 [引导组件清单](../evidence/tahoe26-boot-components.json)补充了 ACPI/UEFI 的大小和哈希。工具不生成身份、不安装驱动、不写回配置，不等同于 ocvalidate 或实机启动。

@@ -1,6 +1,7 @@
 """Read-only checks for this small public repository; not an EFI boot test."""
 import argparse
 import hashlib
+import json
 from pathlib import Path
 import plistlib
 import re
@@ -126,6 +127,22 @@ def validate():
             for link in re.findall(r"\[[^\]]*\]\(([^)]+)\)", text):
                 target = local_target(ROOT, item, link)
                 assert target is None or target.is_file(), "Missing local link in " + relative
+    components = json.loads((ROOT / "evidence/tahoe26-boot-components.json").read_text("utf-8"))
+    from check_efi import inside
+    declared_paths = set()
+    for entry in components["files"]:
+        inside(ROOT, entry["Path"])
+        assert entry["Path"] not in declared_paths, "Duplicate EFI component"
+        declared_paths.add(entry["Path"])
+        assert entry["Bytes"] > 0 and re.fullmatch(r"[0-9a-f]{64}", entry["SHA256"])
+    profile = plistlib.loads((ROOT / "config/config.tahoe26.known-good.sample.plist").read_bytes())
+    expected_paths = {"BOOT/BOOTx64.efi", "OC/OpenCore.efi"}
+    expected_paths.update("OC/ACPI/" + e["Path"] for e in profile["ACPI"]["Add"] if e["Enabled"])
+    expected_paths.update("OC/Drivers/" + e["Path"] for e in profile["UEFI"]["Drivers"] if e["Enabled"])
+    assert declared_paths == expected_paths, "EFI component manifest differs from enabled profile"
+    closure = json.loads((ROOT / "evidence/project-closeout.json").read_text("utf-8"))
+    assert closure["new_native_boot_or_driver_test_performed"] is False
+    assert closure["full_backup_cleanup"]["recoverable_from_github"] is False
     manifest = ROOT / "SHA256SUMS"
     if manifest.exists():
         actual = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()

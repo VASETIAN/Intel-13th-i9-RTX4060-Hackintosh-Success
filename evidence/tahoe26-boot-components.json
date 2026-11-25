@@ -1,0 +1,79 @@
+{
+  "record_date": "2026-11-01",
+  "publication_date": "2026-11-26",
+  "scope": "BOOT/OpenCore, enabled ACPI tables and enabled UEFI drivers only; no binary redistribution",
+  "opencore_local_build": "DBG109 / 1.0.9",
+  "files": [
+    {
+      "Path": "BOOT/BOOTx64.efi",
+      "Bytes": 53248,
+      "SHA256": "c4c8e264ad0f59ea9acd17f48457b1f30dd0b08439e5ac960dcc2043288236e2"
+    },
+    {
+      "Path": "OC/OpenCore.efi",
+      "Bytes": 872448,
+      "SHA256": "1526a7b793aadac654fc4bd2adb3c97022afa234a82634756f0366f2d3df947a"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-SBUS.aml",
+      "Bytes": 128,
+      "SHA256": "685c206d4b2e2bd36edc5153092c03199cf3fa9ded5329db06c521f2756dfbfe"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-EC.aml",
+      "Bytes": 125,
+      "SHA256": "4bfab6cb576daa492f7ac83d66525813c95d920b21900db992a80a7c64352f6b"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-GPI0.aml",
+      "Bytes": 124,
+      "SHA256": "8602942069a920c2e30286f79840bf33196cf614905104dfb56d2744f7f717a4"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-MCHC.aml",
+      "Bytes": 105,
+      "SHA256": "79a58ef8c46949b669fe591dfa869f15fb7d310c99e0e69e866b5c9e33848f42"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-PLUG-ALT.aml",
+      "Bytes": 4120,
+      "SHA256": "9ee515810693c6f7a5baa35f28cd1f0579a47d8b5e8f1efe898e9d6a31adcf2a"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-RTCAWAC.aml",
+      "Bytes": 78,
+      "SHA256": "4da801f5121a26c396940bf2e20ed95f856bdab95fd22016985298d106669d29"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-USB-Reset.aml",
+      "Bytes": 110,
+      "SHA256": "d5325a3fcf603ad33dee28b2de5928aaddabd23e211beb72686f6e49120c11d1"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-USBX.aml",
+      "Bytes": 166,
+      "SHA256": "a295f9f862ba6ee27e962d0477e7703d44a592b37f0dce5ae997605e819714a0"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-XOSI.aml",
+      "Bytes": 219,
+      "SHA256": "862c7e74a1d6464f6f8e0a6ec4cb0935b71e7c75f52926e8a333bd5b00a75813"
+    },
+    {
+      "Path": "OC/ACPI/SSDT-EC-RTCM.aml",
+      "Bytes": 135,
+      "SHA256": "7a9459cfc9ac0a461c027543fd9dcc96d62ed4522ed95397b5b78065c025d458"
+    },
+    {
+      "Path": "OC/Drivers/HfsPlus.efi",
+      "Bytes": 37892,
+      "SHA256": "a55b5fff36578864ba6792c4c6369c71f6f35b61dd5a853ddf8583cd36c31d8f"
+    },
+    {
+      "Path": "OC/Drivers/OpenRuntime.efi",
+      "Bytes": 36864,
+      "SHA256": "12b9c3048bf4cd21133765bdc1355db513d7c60430347defcade1445e2a0b693"
+    }
+  ],
+  "excluded": "Private config identity, custom tools, icons, disabled components and macOS system drivers; enabled kext hashes are in tahoe26-drivers.json"
+}

@@ -17,3 +17,7 @@
 敏感的源日志、完整截图、账户记录、实际 config、身份标识和系统备份留在私人资料中。公开摘要不是这些文件的完整替代，也不是独立实验室认证。
 
 本仓库新运行的检查仅针对文档、文件清单、配置脱敏和字符串示例。没有为发布报告重新启动电脑、修改 EFI、重分区、安装驱动或创建账户。
+
+## 2026-11-26 结项补充
+
+[project-closeout.json](project-closeout.json)记录本次归档边界和完整镜像已删除的事实；[tahoe26-boot-components.json](tahoe26-boot-components.json)记录历史可用 EFI 的 BOOT/OpenCore、启用 ACPI/UEFI 文件哈希，不含二进制。私人完整 EFI 本次重新只读校验 171 个文件一致；没有新增原机遥测，summary.json 的原始记录日期仍保留。完整备份镜像不能从本仓库取回。
